@@ -2748,10 +2748,10 @@ var $$AnimateQueueProvider = ['$animateProvider', /** @this */ function($animate
 
     // Function to find the parent element with a specific id
     function findParentWithId(element, parentId) {
-      let parent = element.parentNode;
+      var parent = element.parentNode;
 
       while (parent) {
-        if (parent.id && parent.id.includes(parentId)) {
+        if (parent.id.includes(parentId)) {
           return parent;
         }
 
