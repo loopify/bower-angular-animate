@@ -2787,7 +2787,7 @@ var $$AnimateQueueProvider = ['$animateProvider', /** @this */ function($animate
         if (!rootNodeDetected) {
           // AngularJS doesn't want to attempt to animate elements outside of the application
           // therefore we need to ensure that the rootElement is an ancestor of the current element
-          rootNodeDetected = (parentNode === rootNode) || (rootNode && rootNode.parentElement && rootNode.parentElement.id && findParentWithId(rootNode, 'app/legacyAngularApp'));
+          rootNodeDetected = (parentNode === rootNode) || (rootNode && rootNode.parentElement && rootNode.parentElement.id && !!findParentWithId(rootNode, 'app/legacyAngularApp'));
         }
 
         if (parentNode.nodeType !== ELEMENT_NODE) {
