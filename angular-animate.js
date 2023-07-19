@@ -2746,6 +2746,21 @@ var $$AnimateQueueProvider = ['$animateProvider', /** @this */ function($animate
       activeAnimationsLookup.delete(node);
     }
 
+    // Function to find the parent element with a specific id
+    function findParentWithId(element, parentId) {
+      let parent = element.parentNode;
+
+      while (parent) {
+        if (parent.id && parent.id.includes(parentId)) {
+          return parent;
+        }
+
+        parent = parent.parentNode;
+      }
+
+      return null; // Return null if the parent with the specific id is not found
+    }
+
     /**
      * This fn returns false if any of the following is true:
      * a) animations on any parent element are disabled, and animations on the element aren't explicitly allowed
@@ -2772,7 +2787,7 @@ var $$AnimateQueueProvider = ['$animateProvider', /** @this */ function($animate
         if (!rootNodeDetected) {
           // AngularJS doesn't want to attempt to animate elements outside of the application
           // therefore we need to ensure that the rootElement is an ancestor of the current element
-          rootNodeDetected = (parentNode === rootNode);
+          rootNodeDetected = (parentNode === rootNode) || (rootNode && rootNode.parentElement && rootNode.parentElement.id && findParentWithId(rootNode, 'app/legacyAngularApp'));
         }
 
         if (parentNode.nodeType !== ELEMENT_NODE) {
